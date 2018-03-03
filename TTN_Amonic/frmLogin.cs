@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Net.Mail;
+using TTN_Amonic.DAL;
 
 namespace TTN_Amonic
 {
@@ -34,8 +35,7 @@ namespace TTN_Amonic
             this.ValidateChildren();
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            ConnectDB db = new ConnectDB();
-            DataTable dtUser = db.Login(username, password);
+            DataTable dtUser = FunctionSession1.Login(username, password);
             if (dtUser.Rows.Count > 0)
             {
                 // Login successful :D
