@@ -47,6 +47,10 @@ namespace TTN_Amonic
                 else
                 {
                     MessageBox.Show("Login successful. You're Officer");
+                    frmUser frmUser = new frmUser();
+                    frmUser.username = dtUser.Rows[0]["FirstName"].ToString();
+                    frmUser.Show();
+                    this.Hide();
                 }
             }
             else
@@ -94,6 +98,14 @@ namespace TTN_Amonic
         {
             if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 e.Cancel = true; 
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin_Click(sender, e);
+            }
         }
     }
 }

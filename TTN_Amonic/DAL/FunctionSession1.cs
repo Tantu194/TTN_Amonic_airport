@@ -10,6 +10,12 @@ namespace TTN_Amonic.DAL
 {
     public static class FunctionSession1
     {
+        /// <summary>
+        /// Login into system
+        /// </summary>
+        /// <param name="username">Email to login</param>
+        /// <param name="password">Password to login</param>
+        /// <returns>Datatable</returns>
         public static DataTable Login(string username, string password)
         {
             string sqlQuery = "select * from Users where Email=@username and Password=@password";
@@ -19,6 +25,11 @@ namespace TTN_Amonic.DAL
             });
         }
 
+        /// <summary>
+        /// Encryt string to MD5
+        /// </summary>
+        /// <param name="input">input</param>
+        /// <returns>MD5 string</returns>
         public static string MD5(string input)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -31,5 +42,10 @@ namespace TTN_Amonic.DAL
             }
             return strBuilder.ToString();
         }
+
+        //public static bool UpdateLogs(DateTime dateLogin, DateTime loginTime, DateTime logoutTime, string reason)
+        //{
+        //    string sqlQuery = "insert"
+        //}
     }
 }

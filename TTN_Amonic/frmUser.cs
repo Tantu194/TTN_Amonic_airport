@@ -11,6 +11,7 @@ namespace TTN_Amonic
 {
     public partial class frmUser : Form
     {
+        public string username = ""; 
         public frmUser()
         {
             InitializeComponent();
@@ -19,6 +20,11 @@ namespace TTN_Amonic
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void frmUser_Load(object sender, EventArgs e)
+        {
+            lblMessage.Text = "Hi " + username + ", Welcome to AMONIC Airlines";
         }
     }
 }
