@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,14 +44,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="DAL\DataAccess.cs" />
+    <Compile Include="frmAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmAdmin.Designer.cs">
+      <DependentUpon>frmAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeRole.Designer.cs">
+      <DependentUpon>frmChangeRole.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAdmin.resx">
+      <DependentUpon>frmAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeRole.resx">
+      <DependentUpon>frmChangeRole.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -60,6 +74,24 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="assets\TCBI____.TTF" />
+    <None Include="assets\TCB_____.TTF" />
+    <None Include="assets\TCCB____.TTF" />
+    <None Include="assets\TCCEB.TTF" />
+    <None Include="assets\TCCM____.TTF" />
+    <None Include="assets\TCMI____.TTF" />
+    <None Include="assets\TCM_____.TTF" />
+    <None Include="assets\texgyreadventor-bold.otf" />
+    <None Include="assets\texgyreadventor-bolditalic.otf" />
+    <None Include="assets\texgyreadventor-italic.otf" />
+    <None Include="assets\texgyreadventor-regular.otf" />
+    <None Include="assets\verdana.ttf" />
+    <None Include="assets\verdanab.ttf" />
+    <None Include="assets\verdanai.ttf" />
+    <None Include="assets\verdanaz.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -69,6 +101,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="assets\white%402x.png" />
+    <Content Include="assets\white%404x.png" />
+    <Content Include="assets\white.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors%404x.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors_%402x.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors_swatches%404x1.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors_with_bg%402x.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors_with_bg%404x.png" />
+    <Content Include="assets\WSC2017_TP09_2_colors_with_bg.png" />
+    <Content Include="assets\WSC2017_TP09_Airplane-Amonic-Single.png" />
+    <Content Include="assets\WSC2017_TP09_Airplane-Amonic.png" />
+    <Content Include="assets\WSC2017_TP09_black%402x.png" />
+    <Content Include="assets\WSC2017_TP09_black%404x.png" />
+    <Content Include="assets\WSC2017_TP09_black.png" />
+    <Content Include="assets\WSC2017_TP09_color%402x.png" />
+    <Content Include="assets\WSC2017_TP09_color%404x.png" />
+    <Content Include="assets\WSC2017_TP09_color.png" />
+    <Content Include="assets\WSC2017_TP09_color_swatches%404x1.png" />
+    <Content Include="assets\WSC2017_TP09_color_swatches.jpg" />
+    <Content Include="assets\WSC2017_TP09_mono%402x.png" />
+    <Content Include="assets\WSC2017_TP09_mono%404x.png" />
+    <Content Include="assets\WSC2017_TP09_mono.png" />
+    <Content Include="assets\WSC2017_TP09_mono_swatches%404x1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
