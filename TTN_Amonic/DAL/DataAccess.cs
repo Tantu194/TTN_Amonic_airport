@@ -10,7 +10,7 @@ namespace TTN_Amonic.DAL
 {
     public class DataAccess
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["strConnectionSession1"].ConnectionString;
 
         public static DataTable Query(string query, Dictionary<string, object> param = null)
         {

@@ -64,5 +64,35 @@ namespace TTN_Amonic
         {
 
         }
+        /// <summary>
+        /// thuc thi thay doi
+        /// </summary>
+        private void apply()
+        {
+            int roleID = 1;
+            if (rdUser.Checked)
+            {
+                roleID = 2;
+            }
+            
+            try
+            {
+                if(DataAccess.Execute(@"update Users set RoleID = @roleID where id = @uid", new Dictionary<string, object> {
+                    { "roleID", roleID},
+                    {"id", uid}
+                }))
+                {
+                    MessageBox.Show("Thông báo","Thay đổi thành công!",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Thông báo", "Thay đổi Thất bại!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Lỗi: khong nap duoc du lieu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
