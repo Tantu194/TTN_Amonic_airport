@@ -100,7 +100,9 @@
             this.columnHeader4,
             this.columnHeader5});
             this.lvLogs.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvLogs.FullRowSelect = true;
             this.lvLogs.Location = new System.Drawing.Point(16, 103);
+            this.lvLogs.MultiSelect = false;
             this.lvLogs.Name = "lvLogs";
             this.lvLogs.Size = new System.Drawing.Size(744, 366);
             this.lvLogs.TabIndex = 5;
