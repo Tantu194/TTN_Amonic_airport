@@ -82,5 +82,14 @@ namespace TTN_Amonic.DAL
                 {"@LoginTime", loginTime}
             });
         }
+        /// <summary>
+        /// get all office
+        /// </summary>
+        /// <returns>data table</returns>
+        public static DataTable getAllOffices()
+        {
+            String q = "select * from Offices";
+            return DataAccess.Query(q);
+        }
     }
 }

@@ -46,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 28);
+            this.label1.Location = new System.Drawing.Point(27, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 17);
             this.label1.TabIndex = 0;
@@ -57,13 +57,13 @@
             this.tbEmail.Enabled = false;
             this.tbEmail.Location = new System.Drawing.Point(165, 28);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(165, 24);
+            this.tbEmail.Size = new System.Drawing.Size(185, 24);
             this.tbEmail.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 69);
+            this.label2.Location = new System.Drawing.Point(27, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 17);
             this.label2.TabIndex = 0;
@@ -74,13 +74,13 @@
             this.tbFName.Enabled = false;
             this.tbFName.Location = new System.Drawing.Point(165, 66);
             this.tbFName.Name = "tbFName";
-            this.tbFName.Size = new System.Drawing.Size(165, 24);
+            this.tbFName.Size = new System.Drawing.Size(185, 24);
             this.tbFName.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 110);
+            this.label3.Location = new System.Drawing.Point(27, 110);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 17);
             this.label3.TabIndex = 0;
@@ -91,13 +91,13 @@
             this.tbLName.Enabled = false;
             this.tbLName.Location = new System.Drawing.Point(165, 107);
             this.tbLName.Name = "tbLName";
-            this.tbLName.Size = new System.Drawing.Size(165, 24);
+            this.tbLName.Size = new System.Drawing.Size(185, 24);
             this.tbLName.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(54, 153);
+            this.label4.Location = new System.Drawing.Point(27, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 17);
             this.label4.TabIndex = 0;
@@ -109,7 +109,7 @@
             this.cbOffice.FormattingEnabled = true;
             this.cbOffice.Location = new System.Drawing.Point(165, 150);
             this.cbOffice.Name = "cbOffice";
-            this.cbOffice.Size = new System.Drawing.Size(164, 24);
+            this.cbOffice.Size = new System.Drawing.Size(185, 24);
             this.cbOffice.TabIndex = 2;
             // 
             // rdUser
@@ -159,6 +159,7 @@
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frmChangeRole
             // 
@@ -179,8 +180,12 @@
             this.Controls.Add(this.tbEmail);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmChangeRole";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Role";
             this.Load += new System.EventHandler(this.frmChangeRole_Load);
             this.ResumeLayout(false);

@@ -37,7 +37,7 @@ namespace TTN_Amonic
                 tbEmail.Text = dt.Rows[0]["Email"].ToString();
                 tbFName.Text = dt.Rows[0]["FirstName"].ToString();
                 tbLName.Text = dt.Rows[0]["LastName"].ToString();
-                cbOffice.SelectedText = dt.Rows[0]["Title"].ToString();
+                cbOffice.Text = dt.Rows[0]["Title"].ToString();
                 if (dt.Rows[0]["RoleID"].ToString() == "1")
                 {
                     rdAdmin.Checked = true;
@@ -94,6 +94,11 @@ namespace TTN_Amonic
             {
                 MessageBox.Show("Lỗi: khong nap duoc du lieu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

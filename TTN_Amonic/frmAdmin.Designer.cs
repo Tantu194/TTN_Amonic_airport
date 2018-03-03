@@ -36,10 +36,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbOfice = new System.Windows.Forms.ComboBox();
             this.dtgrvUser = new System.Windows.Forms.DataGridView();
-            this.btnChangeRole = new System.Windows.Forms.Button();
-            this.btnEnable = new System.Windows.Forms.Button();
-            this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.session1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colFName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +43,10 @@
             this.userRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.office = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnChangeRole = new System.Windows.Forms.Button();
+            this.btnEnable = new System.Windows.Forms.Button();
+            this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.session1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrvUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).BeginInit();
@@ -76,6 +76,7 @@
             this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
             this.addUserToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.addUserToolStripMenuItem.Text = "&Add user";
+            this.addUserToolStripMenuItem.Click += new System.EventHandler(this.addUserToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -122,26 +123,6 @@
             this.dtgrvUser.Size = new System.Drawing.Size(604, 302);
             this.dtgrvUser.TabIndex = 5;
             this.dtgrvUser.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dtgrvUser_CellFormatting);
-            // 
-            // btnChangeRole
-            // 
-            this.btnChangeRole.Location = new System.Drawing.Point(15, 366);
-            this.btnChangeRole.Name = "btnChangeRole";
-            this.btnChangeRole.Size = new System.Drawing.Size(105, 35);
-            this.btnChangeRole.TabIndex = 6;
-            this.btnChangeRole.Text = "Change Role";
-            this.btnChangeRole.UseVisualStyleBackColor = true;
-            this.btnChangeRole.Click += new System.EventHandler(this.btnChangeRole_Click);
-            // 
-            // btnEnable
-            // 
-            this.btnEnable.Location = new System.Drawing.Point(215, 366);
-            this.btnEnable.Name = "btnEnable";
-            this.btnEnable.Size = new System.Drawing.Size(167, 35);
-            this.btnEnable.TabIndex = 6;
-            this.btnEnable.Text = "Enable/Disable Login";
-            this.btnEnable.UseVisualStyleBackColor = true;
-            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
             // colFName
             // 
@@ -192,6 +173,26 @@
             this.office.MinimumWidth = 100;
             this.office.Name = "office";
             // 
+            // btnChangeRole
+            // 
+            this.btnChangeRole.Location = new System.Drawing.Point(15, 366);
+            this.btnChangeRole.Name = "btnChangeRole";
+            this.btnChangeRole.Size = new System.Drawing.Size(105, 35);
+            this.btnChangeRole.TabIndex = 6;
+            this.btnChangeRole.Text = "Change Role";
+            this.btnChangeRole.UseVisualStyleBackColor = true;
+            this.btnChangeRole.Click += new System.EventHandler(this.btnChangeRole_Click);
+            // 
+            // btnEnable
+            // 
+            this.btnEnable.Location = new System.Drawing.Point(215, 366);
+            this.btnEnable.Name = "btnEnable";
+            this.btnEnable.Size = new System.Drawing.Size(167, 35);
+            this.btnEnable.TabIndex = 6;
+            this.btnEnable.Text = "Enable/Disable Login";
+            this.btnEnable.UseVisualStyleBackColor = true;
+            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -204,8 +205,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAdmin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMONIC Airllines Automation Systems";
             this.Load += new System.EventHandler(this.frmAdmin_Load);
             this.menuStrip1.ResumeLayout(false);

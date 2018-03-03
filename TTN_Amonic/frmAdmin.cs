@@ -83,5 +83,11 @@ FROM Offices (NOLOCK)");
         {
 
         }
+
+        private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddUser frmAddUser = new frmAddUser();
+            frmAddUser.ShowDialog(this);
+        }
     }
 }
