@@ -43,9 +43,44 @@ namespace TTN_Amonic.DAL
             return strBuilder.ToString();
         }
 
-        //public static bool UpdateLogs(DateTime dateLogin, DateTime loginTime, DateTime logoutTime, string reason)
-        //{
-        //    string sqlQuery = "insert"
-        //}
+        /// <summary>
+        /// Update Logs when user logout
+        /// </summary>
+        /// <param name="UserId">User ID</param>
+        /// <param name="dateLogin">Date user login</param>
+        /// <param name="loginTime">Time user login</param>
+        /// <param name="logoutTime">Time user logout</param>
+        /// <param name="reason">reason cash system</param>
+        /// <returns>True or False</returns>
+        public static bool UpdateLogs(int UserId, string dateLogin, string loginTime, string logoutTime, string reason)
+        {
+            string sqlQuery = "update Logs set LogoutTime=@LogoutTime, Reason=@reason where UserId=@UserId and DateLogin=@DateLogin";
+            //string sqlQuery = "insert into Logs values(@UserId, @DateTime, @LoginTime, @LogoutTime, @Reason)";
+            return DataAccess.Execute(sqlQuery, new Dictionary<string, object>
+            {
+                {"@LogoutTime", logoutTime},
+                {"@Reason", reason},
+                {"@UserId", UserId},
+                {"@DateTime", dateLogin}
+            });
+        }
+
+        /// <summary>
+        /// Insert Logs when user login
+        /// </summary>
+        /// <param name="UserId">User ID</param>
+        /// <param name="dateLogin">Date user login</param>
+        /// <param name="loginTime">Time user login</param>
+        /// <returns>True or False</returns>
+        public static bool InsertLogs(int UserId, string dateLogin, string loginTime)
+        {
+            string sqlQuery = "insert into Logs values(@UserId, @DateLogin, @LoginTime)";
+            return DataAccess.Execute(sqlQuery, new Dictionary<string, object>
+            {
+                {"@UserId", UserId},
+                {"@DateLogin", dateLogin},
+                {"@LoginTime", loginTime}
+            });
+        }
     }
 }

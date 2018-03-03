@@ -46,7 +46,8 @@ namespace TTN_Amonic
                 }
                 else
                 {
-                    MessageBox.Show("Login successful. You're Officer");
+                    int UserID = Int32.Parse(dtUser.Rows[0]["ID"].ToString());
+                    FunctionSession1.InsertLogs(UserID, DateTime.Now.ToString("MM:dd:YYYY"), DateTime.Now.ToString("hh:mm"));
                     frmUser frmUser = new frmUser();
                     frmUser.username = dtUser.Rows[0]["FirstName"].ToString();
                     frmUser.Show();
