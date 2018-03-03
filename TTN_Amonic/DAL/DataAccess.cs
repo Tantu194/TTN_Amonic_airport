@@ -61,11 +61,13 @@ namespace TTN_Amonic.DAL
                     connection.Open();
                     transaction = connection.BeginTransaction();
 
-                    SqlCommand cmd = new SqlCommand(query, connection);
+                    SqlCommand cmd = new SqlCommand(query, connection,transaction);
                     if (param != null && param.Count > 0)
                     {
                         foreach (var par in param)
+                        {
                             cmd.Parameters.AddWithValue(par.Key, par.Value);
+                        }
                     }
 
                     int effectedRow = cmd.ExecuteNonQuery();

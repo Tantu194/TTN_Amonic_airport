@@ -62,7 +62,7 @@ namespace TTN_Amonic
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-
+            apply();
         }
         /// <summary>
         /// thuc thi thay doi
@@ -79,14 +79,15 @@ namespace TTN_Amonic
             {
                 if(DataAccess.Execute(@"update Users set RoleID = @roleID where id = @uid", new Dictionary<string, object> {
                     { "roleID", roleID},
-                    {"id", uid}
+                    {"uid", uid}
                 }))
                 {
-                    MessageBox.Show("Thông báo","Thay đổi thành công!",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("Thay đổi thành công!", "Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    loadData();
                 }
                 else
                 {
-                    MessageBox.Show("Thông báo", "Thay đổi Thất bại!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("Thay đổi Thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }
             catch (Exception e)
