@@ -31,9 +31,9 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lblTimeSpent = new System.Windows.Forms.Label();
+            this.lblNumberOfCashes = new System.Windows.Forms.Label();
+            this.lvLogs = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -69,43 +69,43 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "&Exit";
             // 
-            // label1
+            // lblTimeSpent
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
-            this.label1.Location = new System.Drawing.Point(277, 67);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(217, 16);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Time spent on system: 9:00:00";
+            this.lblTimeSpent.AutoSize = true;
+            this.lblTimeSpent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
+            this.lblTimeSpent.Location = new System.Drawing.Point(277, 67);
+            this.lblTimeSpent.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblTimeSpent.Name = "lblTimeSpent";
+            this.lblTimeSpent.Size = new System.Drawing.Size(217, 16);
+            this.lblTimeSpent.TabIndex = 3;
+            this.lblTimeSpent.Text = "Time spent on system: 9:00:00";
             // 
-            // label2
+            // lblNumberOfCashes
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(148)))), ((int)(((byte)(32)))));
-            this.label2.Location = new System.Drawing.Point(522, 67);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(145, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Number of cashes: 1";
+            this.lblNumberOfCashes.AutoSize = true;
+            this.lblNumberOfCashes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(148)))), ((int)(((byte)(32)))));
+            this.lblNumberOfCashes.Location = new System.Drawing.Point(522, 67);
+            this.lblNumberOfCashes.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblNumberOfCashes.Name = "lblNumberOfCashes";
+            this.lblNumberOfCashes.Size = new System.Drawing.Size(145, 16);
+            this.lblNumberOfCashes.TabIndex = 4;
+            this.lblNumberOfCashes.Text = "Number of cashes: 1";
             // 
-            // listView1
+            // lvLogs
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvLogs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.listView1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listView1.Location = new System.Drawing.Point(16, 103);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(744, 366);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvLogs.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvLogs.Location = new System.Drawing.Point(16, 103);
+            this.lvLogs.Name = "lvLogs";
+            this.lvLogs.Size = new System.Drawing.Size(744, 366);
+            this.lvLogs.TabIndex = 5;
+            this.lvLogs.UseCompatibleStateImageBehavior = false;
+            this.lvLogs.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -137,9 +137,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 483);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lvLogs);
+            this.Controls.Add(this.lblNumberOfCashes);
+            this.Controls.Add(this.lblTimeSpent);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -150,6 +150,7 @@
             this.Name = "frmUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AMONIC Airlines Automation System";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUser_FormClosing);
             this.Load += new System.EventHandler(this.frmUser_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -162,9 +163,9 @@
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label lblTimeSpent;
+        private System.Windows.Forms.Label lblNumberOfCashes;
+        private System.Windows.Forms.ListView lvLogs;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

@@ -26,6 +26,17 @@ namespace TTN_Amonic.DAL
         }
 
         /// <summary>
+        /// Logout system
+        /// </summary>
+        /// <param name="userId">User id logout</param>
+        /// <param name="loginTime">Time login</param>
+        /// <param name="reason">The reason when logout unsuccessful</param>
+        public static void Logout(int userId, TimeSpan loginTime, string reason = "")
+        {
+            FunctionSession1.UpdateLogs(userId, loginTime, DateTime.Now.TimeOfDay, reason);
+        }
+
+        /// <summary>
         /// Encryt string to MD5
         /// </summary>
         /// <param name="input">input</param>
@@ -46,22 +57,21 @@ namespace TTN_Amonic.DAL
         /// <summary>
         /// Update Logs when user logout
         /// </summary>
-        /// <param name="UserId">User ID</param>
-        /// <param name="dateLogin">Date user login</param>
-        /// <param name="loginTime">Time user login</param>
-        /// <param name="logoutTime">Time user logout</param>
-        /// <param name="reason">reason cash system</param>
-        /// <returns>True or False</returns>
-        public static bool UpdateLogs(int UserId, string dateLogin, string loginTime, string logoutTime, string reason)
+        /// <param name="UserId"></param>
+        /// <param name="loginTime"></param>
+        /// <param name="logoutTime"></param>
+        /// <param name="reason"></param>
+        /// <returns></returns>
+        public static bool UpdateLogs(int UserId, TimeSpan loginTime, TimeSpan logoutTime, string reason)
         {
-            string sqlQuery = "update Logs set LogoutTime=@LogoutTime, Reason=@reason where UserId=@UserId and DateLogin=@DateLogin";
-            //string sqlQuery = "insert into Logs values(@UserId, @DateTime, @LoginTime, @LogoutTime, @Reason)";
+            string sqlQuery = "update Logs set LogoutTime=@LogoutTime, Reason=@Reason where UserId=@UserId and LoginTime=@LoginTime";
+            //string sqlQuery = "update Logs set LogoutTime='23:59:23', Reason=null where UserId=2 and LoginTime='23:56:14.0348740'";
             return DataAccess.Execute(sqlQuery, new Dictionary<string, object>
             {
                 {"@LogoutTime", logoutTime},
-                {"@Reason", reason},
+                {"@Reason", ""},
                 {"@UserId", UserId},
-                {"@DateTime", dateLogin}
+                {"@LoginTime", loginTime}
             });
         }
 
@@ -72,9 +82,9 @@ namespace TTN_Amonic.DAL
         /// <param name="dateLogin">Date user login</param>
         /// <param name="loginTime">Time user login</param>
         /// <returns>True or False</returns>
-        public static bool InsertLogs(int UserId, string dateLogin, string loginTime)
+        public static bool InsertLogs(int UserId, DateTime dateLogin, TimeSpan loginTime)
         {
-            string sqlQuery = "insert into Logs values(@UserId, @DateLogin, @LoginTime)";
+            string sqlQuery = "insert into Logs(UserId, DateLogin, LoginTime) values(@UserId, @DateLogin, @LoginTime)";
             return DataAccess.Execute(sqlQuery, new Dictionary<string, object>
             {
                 {"@UserId", UserId},
@@ -124,6 +134,16 @@ namespace TTN_Amonic.DAL
         {
             string q = "update Users set Active = @active where ID = @uid";
             return DataAccess.Execute(q,new Dictionary<string, object> { {"active",active },{"uid",uid} });
+        }
+
+        /// <summary>
+        /// Get all logs
+        /// </summary>
+        /// <returns>Data table of logs</returns>
+        public static DataTable getLogs()
+        {
+            string sql = "select * from Logs";
+            return DataAccess.Query(sql);
         }
     }
 }

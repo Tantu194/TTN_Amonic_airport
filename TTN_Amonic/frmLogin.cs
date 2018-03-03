@@ -15,6 +15,9 @@ namespace TTN_Amonic
     public partial class frmLogin : Form
     {
         bool isValidate = false;
+        int loginCount = 0;
+        int timeCountDown = 10;
+
         public frmLogin()
         {
             InitializeComponent();
@@ -22,7 +25,7 @@ namespace TTN_Amonic
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void frmUser_Load(object sender, EventArgs e)
@@ -46,16 +49,34 @@ namespace TTN_Amonic
                 }
                 else
                 {
-                    int UserID = Int32.Parse(dtUser.Rows[0]["ID"].ToString());
-                    FunctionSession1.InsertLogs(UserID, DateTime.Now.ToString("MM:dd:YYYY"), DateTime.Now.ToString("hh:mm"));
-                    frmUser frmUser = new frmUser();
-                    frmUser.username = dtUser.Rows[0]["FirstName"].ToString();
-                    frmUser.Show();
-                    this.Hide();
+                    GlobalClass.UserID = Int32.Parse(dtUser.Rows[0]["ID"].ToString());
+                    GlobalClass.LoginTime = DateTime.Now.TimeOfDay;
+
+                    bool success = FunctionSession1.InsertLogs(GlobalClass.UserID, DateTime.Now.Date, GlobalClass.LoginTime);
+                    if (success)
+                    {
+                        this.Hide();
+                        frmUser frmUser = new frmUser();
+                        frmUser.username = dtUser.Rows[0]["FirstName"].ToString();
+                        frmUser.Show();
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cannot write the logs to database !!!");
+                    }
                 }
             }
             else
             {
+                loginCount++;
+                if (loginCount >= 3)
+                {
+                    txtUsername.Enabled = false;
+                    txtPassword.Enabled = false;
+                    btnLogin.Enabled = false;
+                    timer.Enabled = true;
+                }
                 MessageBox.Show("Username or password was wrong !!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             isValidate = false;
@@ -92,13 +113,24 @@ namespace TTN_Amonic
         private void btnExit_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                Application.Exit();
+            {
+                if (GlobalClass.UserID != -1)
+                    FunctionSession1.Logout(GlobalClass.UserID, GlobalClass.LoginTime);
+                this.Close();
+            }
+
         }
 
         private void frmUser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                e.Cancel = true; 
+            //if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            //    e.Cancel = true;
+            //else
+            //{
+            //    if (GlobalClass.UserID != -1)
+            //        FunctionSession1.Logout(GlobalClass.UserID, GlobalClass.LoginTime);
+            //    this.Close();
+            //}
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
@@ -106,6 +138,20 @@ namespace TTN_Amonic
             if (e.KeyCode == Keys.Enter)
             {
                 btnLogin_Click(sender, e);
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            lblMessage.Text = "You will login continue after: " + timeCountDown.ToString() + " seconds";
+            timeCountDown--;
+            if (timeCountDown <= 0)
+            {
+                txtUsername.Enabled = true;
+                txtPassword.Enabled = true;
+                btnLogin.Enabled = true;
+                timer.Enabled = false;
+                lblMessage.Text = "";
             }
         }
     }

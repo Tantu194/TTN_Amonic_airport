@@ -44,6 +44,7 @@ namespace TTN_Amonic
 
         private bool checkAllField()
         {
+            DateTime dt;
             string bDate = tbBdate.Text;
             string email = tbEmail.Text;
             if (email == "" || tbFName.Text == "" || tbLName.Text == "" || bDate == "" || tbPassword.Text == "")
@@ -57,7 +58,7 @@ namespace TTN_Amonic
                 tbEmail.Focus();
                 return false;
             }
-            else if (DateTime.TryParse(bDate, out DateTime dt))
+            else if (DateTime.TryParse(bDate, out dt))
             {
                 tbBdate.Text = String.Format("{0:yyyy/MM/dd}",dt);
                 return true;
