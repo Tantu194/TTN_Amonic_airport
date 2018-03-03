@@ -51,7 +51,7 @@
             this.cbOffice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbOffice.Name = "cbOffice";
             this.cbOffice.Size = new System.Drawing.Size(185, 24);
-            this.cbOffice.TabIndex = 10;
+            this.cbOffice.TabIndex = 3;
             // 
             // label4
             // 
@@ -86,7 +86,7 @@
             this.tbEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(185, 24);
-            this.tbEmail.TabIndex = 9;
+            this.tbEmail.TabIndex = 0;
             // 
             // label1
             // 
@@ -103,7 +103,7 @@
             this.tbFName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbFName.Name = "tbFName";
             this.tbFName.Size = new System.Drawing.Size(185, 24);
-            this.tbFName.TabIndex = 9;
+            this.tbFName.TabIndex = 1;
             // 
             // tbLName
             // 
@@ -111,7 +111,7 @@
             this.tbLName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbLName.Name = "tbLName";
             this.tbLName.Size = new System.Drawing.Size(185, 24);
-            this.tbLName.TabIndex = 9;
+            this.tbLName.TabIndex = 2;
             // 
             // label5
             // 
@@ -136,18 +136,20 @@
             this.btnSave.Location = new System.Drawing.Point(69, 286);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 29);
-            this.btnSave.TabIndex = 11;
+            this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(245, 286);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 29);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // tbBdate
             // 
@@ -155,15 +157,16 @@
             this.tbBdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbBdate.Name = "tbBdate";
             this.tbBdate.Size = new System.Drawing.Size(185, 24);
-            this.tbBdate.TabIndex = 9;
+            this.tbBdate.TabIndex = 4;
             // 
             // tbPassword
             // 
             this.tbPassword.Location = new System.Drawing.Point(170, 240);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(185, 24);
-            this.tbPassword.TabIndex = 9;
+            this.tbPassword.TabIndex = 5;
             // 
             // frmAddUser
             // 

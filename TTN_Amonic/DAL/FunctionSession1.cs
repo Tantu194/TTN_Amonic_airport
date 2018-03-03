@@ -91,5 +91,39 @@ namespace TTN_Amonic.DAL
             String q = "select * from Offices";
             return DataAccess.Query(q);
         }
+
+        /// <summary>
+        /// insert User
+        /// </summary>
+        /// <param name="param">du lieu cua user</param>
+        /// <returns>true or false</returns>
+        public static bool insertUser(Dictionary<String,Object> param)
+        {
+            DataRow dr = DataAccess.QuerySingle("select top 1 ID from Users order by ID Desc");
+            if (dr != null)
+            {
+                int uid = int.Parse(dr["ID"] + string.Empty) + 1;
+                param.Add("ID", uid);
+                string q = @"INSERT INTO Users(RoleID, Email, Password, FirstName, LastName, OfficeID, Birthdate, Active, ID) VALUES (2, @Email, @Password, @FirstName, @LastName, @OfficeId, @Birthdate, 1, @ID)";
+
+                return DataAccess.Execute(q, param);
+            }
+            //if (dt.Rows.Count > 0)
+            //{
+            //    int uid = int.Parse(dt.Rows[0]["ID"].ToString()) + 1;
+            //    //Console.WriteLine(uid);
+            //    string q = @"insert into Users VALUES (" + uid + ", 2, @email, @password, @firstName, @lastName, @officeID, @birthdate, 1)";
+            //    return DataAccess.Execute(q, param);
+            //}
+            //return false;
+
+            return false;
+        }
+
+        public static bool enableUser(int uid, int active)
+        {
+            string q = "update Users set Active = @active where ID = @uid";
+            return DataAccess.Execute(q,new Dictionary<string, object> { {"active",active },{"uid",uid} });
+        }
     }
 }

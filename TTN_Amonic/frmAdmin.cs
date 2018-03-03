@@ -12,11 +12,13 @@ namespace TTN_Amonic
 {
     public partial class frmAdmin : Form
     {
-        private void LoadUser(int officeId = -1)
+        int selectPos = 0;
+
+        public void LoadUser(int officeId = -1)
         {
             dtgrvUser.DataBindings.Clear();
             dtgrvUser.DataSource = DataAccess.Query(
-                @"SELECT u.ID, u.FirstName, u.LastName, DATEDIFF(YEAR, u.Birthdate, GETDATE()) Age, u.Email,
+                @"SELECT u.ID, u.FirstName, u.LastName, u.Active, DATEDIFF(YEAR, u.Birthdate, GETDATE()) Age, u.Email,
 	                r.Title RoleTitle,
 	                o.Title OfficeTitle
                 FROM Users (NOLOCK) u
@@ -26,6 +28,16 @@ namespace TTN_Amonic
                 {
                     { "OfficeId", officeId }
                 });
+            foreach(DataGridViewRow r in dtgrvUser.Rows)
+            {
+                if (!bool.Parse(r.Cells["Active"].Value.ToString()))
+                {
+                    r.DefaultCellStyle.BackColor = Color.Red;
+                    r.DefaultCellStyle.ForeColor = Color.White;
+                }
+            }
+            if(dtgrvUser.Rows.Count > 0)
+            dtgrvUser.Rows[selectPos].Selected = true;
         }
 
         private void LoadOffice()
@@ -58,10 +70,6 @@ FROM Offices (NOLOCK)");
             LoadOffice();
         }
 
-        private void dtgrvUser_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-        }
-
         private void cbOfice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!(cbOfice.SelectedValue is DataRowView))
@@ -81,13 +89,28 @@ FROM Offices (NOLOCK)");
 
         private void btnEnable_Click(object sender, EventArgs e)
         {
+            enableUser();
+        }
 
+        /// <summary>
+        ///enable or disable user 
+        /// </summary>
+        private void enableUser()
+        {
+            DataGridViewSelectedRowCollection row = dtgrvUser.SelectedRows;
+            int uid = int.Parse(row[0].Cells["ID"].Value.ToString());
+            int active = Math.Abs(Convert.ToInt32(row[0].Cells["Active"].Value) - 1);
+            FunctionSession1.enableUser(uid, active);
+            selectPos = row[0].Index;
+            LoadUser();
         }
 
         private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddUser frmAddUser = new frmAddUser();
-            frmAddUser.ShowDialog(this);
+            frmAddUser addUser = new frmAddUser();
+            addUser.frmAdmin = this;
+            addUser.ShowDialog();
         }
+
     }
 }

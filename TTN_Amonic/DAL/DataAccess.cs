@@ -45,6 +45,16 @@ namespace TTN_Amonic.DAL
                 }
             }
         }
+
+        public static DataRow QuerySingle(string query, Dictionary<string, object> param = null)
+        {
+            DataTable dt = Query(query, param);
+            if (dt != null && dt.Rows.Count > 0)
+                return dt.Rows[0];
+
+            return null;
+        }
+
         /// <summary>
         /// thuc thi query
         /// </summary>

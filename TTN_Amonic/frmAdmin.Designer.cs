@@ -36,17 +36,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbOfice = new System.Windows.Forms.ComboBox();
             this.dtgrvUser = new System.Windows.Forms.DataGridView();
+            this.btnChangeRole = new System.Windows.Forms.Button();
+            this.btnEnable = new System.Windows.Forms.Button();
+            this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.session1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colFName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Active = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.office = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnChangeRole = new System.Windows.Forms.Button();
-            this.btnEnable = new System.Windows.Forms.Button();
-            this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.session1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgrvUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).BeginInit();
@@ -66,7 +67,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(634, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(685, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -109,6 +110,7 @@
             this.dtgrvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgrvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colFName,
+            this.Active,
             this.ID,
             this.lastName,
             this.age,
@@ -120,58 +122,8 @@
             this.dtgrvUser.Name = "dtgrvUser";
             this.dtgrvUser.RowHeadersVisible = false;
             this.dtgrvUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgrvUser.Size = new System.Drawing.Size(604, 302);
+            this.dtgrvUser.Size = new System.Drawing.Size(654, 302);
             this.dtgrvUser.TabIndex = 5;
-            this.dtgrvUser.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dtgrvUser_CellFormatting);
-            // 
-            // colFName
-            // 
-            this.colFName.DataPropertyName = "FirstName";
-            this.colFName.HeaderText = "Name";
-            this.colFName.MinimumWidth = 100;
-            this.colFName.Name = "colFName";
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            // 
-            // lastName
-            // 
-            this.lastName.DataPropertyName = "LastName";
-            this.lastName.HeaderText = "Last Name";
-            this.lastName.MinimumWidth = 100;
-            this.lastName.Name = "lastName";
-            // 
-            // age
-            // 
-            this.age.DataPropertyName = "Age";
-            this.age.HeaderText = "Age";
-            this.age.MinimumWidth = 50;
-            this.age.Name = "age";
-            // 
-            // userRole
-            // 
-            this.userRole.DataPropertyName = "RoleTitle";
-            this.userRole.HeaderText = "User Role";
-            this.userRole.MinimumWidth = 100;
-            this.userRole.Name = "userRole";
-            // 
-            // emal
-            // 
-            this.emal.DataPropertyName = "Email";
-            this.emal.HeaderText = "Emal Address";
-            this.emal.MinimumWidth = 100;
-            this.emal.Name = "emal";
-            // 
-            // office
-            // 
-            this.office.DataPropertyName = "OfficeTitle";
-            this.office.HeaderText = "Office";
-            this.office.MinimumWidth = 100;
-            this.office.Name = "office";
             // 
             // btnChangeRole
             // 
@@ -193,11 +145,69 @@
             this.btnEnable.UseVisualStyleBackColor = true;
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
+            // colFName
+            // 
+            this.colFName.DataPropertyName = "FirstName";
+            this.colFName.HeaderText = "Name";
+            this.colFName.MinimumWidth = 100;
+            this.colFName.Name = "colFName";
+            // 
+            // Active
+            // 
+            this.Active.DataPropertyName = "Active";
+            this.Active.HeaderText = "Active";
+            this.Active.Name = "Active";
+            this.Active.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            // 
+            // lastName
+            // 
+            this.lastName.DataPropertyName = "LastName";
+            this.lastName.HeaderText = "Last Name";
+            this.lastName.MinimumWidth = 100;
+            this.lastName.Name = "lastName";
+            // 
+            // age
+            // 
+            this.age.DataPropertyName = "Age";
+            this.age.HeaderText = "Age";
+            this.age.MinimumWidth = 50;
+            this.age.Name = "age";
+            this.age.Width = 50;
+            // 
+            // userRole
+            // 
+            this.userRole.DataPropertyName = "RoleTitle";
+            this.userRole.HeaderText = "User Role";
+            this.userRole.MinimumWidth = 100;
+            this.userRole.Name = "userRole";
+            // 
+            // emal
+            // 
+            this.emal.DataPropertyName = "Email";
+            this.emal.HeaderText = "Emal Address";
+            this.emal.MinimumWidth = 100;
+            this.emal.Name = "emal";
+            this.emal.Width = 200;
+            // 
+            // office
+            // 
+            this.office.DataPropertyName = "OfficeTitle";
+            this.office.HeaderText = "Office";
+            this.office.MinimumWidth = 100;
+            this.office.Name = "office";
+            // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 413);
+            this.ClientSize = new System.Drawing.Size(685, 413);
             this.Controls.Add(this.btnEnable);
             this.Controls.Add(this.btnChangeRole);
             this.Controls.Add(this.dtgrvUser);
@@ -237,6 +247,7 @@
         private System.Windows.Forms.Button btnChangeRole;
         private System.Windows.Forms.Button btnEnable;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Active;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn age;
