@@ -66,10 +66,11 @@ namespace TTN_Amonic.DAL
         {
             string sqlQuery = "update Logs set LogoutTime=@LogoutTime, Reason=@Reason where UserId=@UserId and LoginTime=@LoginTime";
             //string sqlQuery = "update Logs set LogoutTime='23:59:23', Reason=null where UserId=2 and LoginTime='23:56:14.0348740'";
+            var s = logoutTime.Equals(TimeSpan.Zero) ? DBNull.Value.ToString() : logoutTime.ToString();
             return DataAccess.Execute(sqlQuery, new Dictionary<string, object>
             {
-                {"@LogoutTime", logoutTime},
-                {"@Reason", ""},
+                {"@LogoutTime", s},
+                {"@Reason", reason},
                 {"@UserId", UserId},
                 {"@LoginTime", loginTime}
             });
@@ -107,7 +108,7 @@ namespace TTN_Amonic.DAL
         /// </summary>
         /// <param name="param">du lieu cua user</param>
         /// <returns>true or false</returns>
-        public static bool insertUser(Dictionary<String,Object> param)
+        public static bool insertUser(Dictionary<String, Object> param)
         {
             DataRow dr = DataAccess.QuerySingle("select top 1 ID from Users order by ID Desc");
             if (dr != null)
@@ -133,7 +134,7 @@ namespace TTN_Amonic.DAL
         public static bool enableUser(int uid, int active)
         {
             string q = "update Users set Active = @active where ID = @uid";
-            return DataAccess.Execute(q,new Dictionary<string, object> { {"active",active },{"uid",uid} });
+            return DataAccess.Execute(q, new Dictionary<string, object> { { "active", active }, { "uid", uid } });
         }
 
         /// <summary>
@@ -144,6 +145,18 @@ namespace TTN_Amonic.DAL
         {
             string sql = "select * from Logs";
             return DataAccess.Query(sql);
+        }
+
+        /// <summary>
+        /// get logs by user id
+        /// </summary>
+        /// <param name="userId">User id</param>
+        /// <returns></returns>
+        public static DataTable getLogByUserId(int userId)
+        {
+            return DataAccess.Query("select * from Logs where UserId=@UserId", new Dictionary<string, object> {
+                { "@UserId", userId}
+            });
         }
     }
 }
