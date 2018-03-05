@@ -17,7 +17,7 @@ namespace TTN_Amonic
         bool isValidate = false;
         int loginCount = 0;
         int timeCountDown = 10;
-
+        bool isClose = false;
         public frmLogin()
         {
             InitializeComponent();
@@ -72,7 +72,8 @@ namespace TTN_Amonic
                         bool success = FunctionSession1.InsertLogs(GlobalClass.UserID, DateTime.Now.Date, GlobalClass.LoginTime);
                         if (success)
                         {
-                            this.Hide();
+                            isClose = true;
+                            this.Close();
                             frmUser frmUser = new frmUser();
                             frmUser.Show();
                         }
@@ -144,14 +145,15 @@ namespace TTN_Amonic
 
         private void frmUser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            //    e.Cancel = true;
-            //else
-            //{
-            //    if (GlobalClass.UserID != -1)
-            //        FunctionSession1.Logout(GlobalClass.UserID, GlobalClass.LoginTime);
-            //    this.Close();
-            //}
+            if (isClose) return;
+            if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                e.Cancel = true;
+            else
+            {
+                if (GlobalClass.UserID != -1)
+                    FunctionSession1.Logout(GlobalClass.UserID, GlobalClass.LoginTime);
+                this.Close();
+            }
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
