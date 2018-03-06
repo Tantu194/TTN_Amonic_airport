@@ -46,6 +46,7 @@
             // 
             // cbOffice
             // 
+            this.cbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOffice.FormattingEnabled = true;
             this.cbOffice.Location = new System.Drawing.Point(170, 153);
             this.cbOffice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
