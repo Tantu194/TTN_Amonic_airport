@@ -18,7 +18,9 @@ namespace TTN_Amonic
             InitializeComponent();
         }
 
-        public frmAdmin frmAdmin;
+        private frmAdmin frmAdmin;
+
+        public frmAdmin FrmAdmin { get => frmAdmin; set => frmAdmin = value; }
 
         private void frmAddUser_Load(object sender, EventArgs e)
         {
@@ -49,12 +51,12 @@ namespace TTN_Amonic
             string email = tbEmail.Text;
             if (email == "" || tbFName.Text == "" || tbLName.Text == "" || bDate == "" || tbPassword.Text == "")
             {
-                MessageBox.Show("Các trường không được rỗng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Fields should not be empty", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else if (!validateEmail(email))
             {
-                MessageBox.Show("Định dạng Email không hợp lệ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Email Format", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbEmail.Focus();
                 return false;
             }
@@ -65,7 +67,7 @@ namespace TTN_Amonic
             }
             else
             {
-                MessageBox.Show("Định dạng Birthdate không hợp lệ (dd/MM/yyyy)","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Birthdate format is invalid (dd/MM/yyyy)", "Notification",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 tbBdate.Focus();
                 return false;
             }
@@ -83,13 +85,13 @@ namespace TTN_Amonic
             param.Add("Birthdate",tbBdate.Text.ToString());
             if (FunctionSession1.insertUser(param))
             {
-                MessageBox.Show("Lưu thành công!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                frmAdmin.LoadUser();
+                MessageBox.Show("Saved successfully!!!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                FrmAdmin.LoadUser();
                 emptyField();
             }
             else
             {
-                MessageBox.Show("Lưu thất bại!!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("save failed!!!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

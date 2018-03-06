@@ -12,7 +12,7 @@ namespace TTN_Amonic
 {
     public partial class frmUser : Form
     {
-        public string username = ""; 
+        public string username = "";
 
         public frmUser()
         {
@@ -33,22 +33,26 @@ namespace TTN_Amonic
             for (int i = 0; i < dtLogs.Rows.Count - 1; i++)
             {
                 DateTime loginTime = DateTime.Parse(dtLogs.Rows[i]["LoginTime"].ToString());
-                string strLogoutTime = "";
+                string strLogoutTime = "**";
                 //string strReason = "";
-                string timeSpent = "";
+                string timeSpent = "**";
                 if (!DBNull.Value.Equals(dtLogs.Rows[i]["LogoutTime"]))
                 {
-                    DateTime logoutTime = DateTime.Parse(dtLogs.Rows[i]["LogoutTime"].ToString());
-                    strLogoutTime = loginTime.ToString("HH:mm");
-                    TimeSpan timeS = logoutTime.Subtract(loginTime);
-                    totalTimeSpentOnSystem = totalTimeSpentOnSystem.Add(timeS);
-                    timeSpent = timeS.ToString(@"hh\:mm\:ss");
+                    if (!TimeSpan.Parse(dtLogs.Rows[i]["LogoutTime"].ToString()).Equals(TimeSpan.Zero))
+                    {
+                        DateTime logoutTime = DateTime.Parse(dtLogs.Rows[i]["LogoutTime"].ToString());
+                        strLogoutTime = loginTime.ToString("HH:mm");
+                        TimeSpan timeS = logoutTime.Subtract(loginTime);
+                        totalTimeSpentOnSystem = totalTimeSpentOnSystem.Add(timeS);
+                        timeSpent = timeS.ToString(@"hh\:mm\:ss");
+                    }
+
                 }
                 else
                 {
                     numOfCashes++;
                 }
-                
+
                 string[] arrayItem = {
                     DateTime.Parse(dtLogs.Rows[i]["DateLogin"].ToString()).ToString("dd/MM/yyyy"),
                     loginTime.ToString("HH:mm"),
@@ -57,7 +61,7 @@ namespace TTN_Amonic
                     dtLogs.Rows[i]["Reason"].ToString()
                 };
                 ListViewItem item = new ListViewItem(arrayItem);
-                if (strLogoutTime == "") item.BackColor = Color.Red;
+                if (strLogoutTime == "**") item.BackColor = Color.Red;
                 lvLogs.Items.Add(item);
             }
 
@@ -67,7 +71,7 @@ namespace TTN_Amonic
 
         private void frmUser_Load(object sender, EventArgs e)
         {
-            lblMessage.Text = "Hi " + username + ", Welcome to AMONIC Airlines";
+            lblMessage.Text = "Hi " + GlobalClass.FirstName + ", Welcome to AMONIC Airlines";
             loadLogs();
         }
 

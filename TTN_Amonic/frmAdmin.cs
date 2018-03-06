@@ -16,28 +16,28 @@ namespace TTN_Amonic
 
         public void LoadUser(int officeId = -1)
         {
-            dtgrvUser.DataBindings.Clear();
-            dtgrvUser.DataSource = DataAccess.Query(
-                @"SELECT u.ID, u.FirstName, u.LastName, u.Active, DATEDIFF(YEAR, u.Birthdate, GETDATE()) Age, u.Email,
-	                r.Title RoleTitle,
-	                o.Title OfficeTitle
-                FROM Users (NOLOCK) u
-	                LEFT JOIN Roles (NOLOCK) r ON r.ID = u.RoleID
-	                LEFT JOIN Offices (NOLOCK) o ON o.ID = u.OfficeID
-                WHERE (@OfficeId = -1 OR u.OfficeId = @OfficeId)", new Dictionary<string, object>
-                {
-                    { "OfficeId", officeId }
-                });
-            foreach(DataGridViewRow r in dtgrvUser.Rows)
+            lvUser.Items.Clear();
+            DataTable dt = FunctionSession1.getAllUser(officeId);
+            foreach(DataRow r in dt.Rows)
             {
-                if (!bool.Parse(r.Cells["Active"].Value.ToString()))
+                ListViewItem item = new ListViewItem();
+                item.Text = r["FirstName"] + string.Empty;
+                item.SubItems.Add(r["LastName"] + string.Empty);
+                item.SubItems.Add(r["Age"] + string.Empty);
+                item.SubItems.Add(r["RoleTitle"] + string.Empty);
+                item.SubItems.Add(r["Email"] + string.Empty);              
+                item.SubItems.Add(r["OfficeTitle"] + string.Empty);
+                item.SubItems.Add(r["ID"] + string.Empty);
+                item.SubItems.Add(r["Active"] + string.Empty);
+                if (!bool.Parse(r["Active"] + string.Empty))
                 {
-                    r.DefaultCellStyle.BackColor = Color.Red;
-                    r.DefaultCellStyle.ForeColor = Color.White;
+                    item.BackColor = Color.Red;
+                    item.ForeColor = Color.White;
                 }
+                lvUser.Items.Add(item);
             }
-            if(dtgrvUser.Rows.Count > 0)
-            dtgrvUser.Rows[selectPos].Selected = true;
+            if(lvUser.Items.Count > 0)
+                lvUser.Items[selectPos].Selected = true;
         }
 
         private void LoadOffice()
@@ -64,7 +64,7 @@ FROM Offices (NOLOCK)");
 
         private void frmAdmin_Load(object sender, EventArgs e)
         {
-            dtgrvUser.AutoGenerateColumns = false;
+            
             LoadUser();
 
             LoadOffice();
@@ -78,9 +78,8 @@ FROM Offices (NOLOCK)");
 
         private void btnChangeRole_Click(object sender, EventArgs e)
         {
-            DataGridViewSelectedRowCollection row = dtgrvUser.SelectedRows;
-            int uid = int.Parse(row[0].Cells["ID"].Value.ToString());
-
+            ListView.SelectedListViewItemCollection row = lvUser.SelectedItems;
+            int uid = int.Parse(row[0].SubItems[6].Text+string.Empty);
             //MessageBox.Show(uid +"");
             frmChangeRole frmChangeRole = new frmChangeRole();
             frmChangeRole.Uid = uid;
@@ -97,9 +96,9 @@ FROM Offices (NOLOCK)");
         /// </summary>
         private void enableUser()
         {
-            DataGridViewSelectedRowCollection row = dtgrvUser.SelectedRows;
-            int uid = int.Parse(row[0].Cells["ID"].Value.ToString());
-            int active = Math.Abs(Convert.ToInt32(row[0].Cells["Active"].Value) - 1);
+            ListView.SelectedListViewItemCollection row = lvUser.SelectedItems;
+            int uid = Convert.ToInt32(row[0].SubItems[6].Text + string.Empty);
+            int active = bool.Parse(row[0].SubItems[7].Text + string.Empty)?0:1;
             FunctionSession1.enableUser(uid, active);
             selectPos = row[0].Index;
             LoadUser();
@@ -108,7 +107,7 @@ FROM Offices (NOLOCK)");
         private void addUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddUser addUser = new frmAddUser();
-            addUser.frmAdmin = this;
+            addUser.FrmAdmin = this;
             addUser.ShowDialog();
         }
 

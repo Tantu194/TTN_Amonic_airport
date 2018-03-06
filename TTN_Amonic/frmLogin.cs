@@ -17,7 +17,7 @@ namespace TTN_Amonic
         bool isValidate = false;
         int loginCount = 0;
         int timeCountDown = 10;
-
+        bool isClose = false;
         public frmLogin()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace TTN_Amonic
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void frmUser_Load(object sender, EventArgs e)
@@ -43,28 +43,49 @@ namespace TTN_Amonic
             {
                 // Login successful :D
                 int role = Int32.Parse(dtUser.Rows[0]["RoleID"].ToString());
-                if (role == 1)
-                {
-                    MessageBox.Show("Login successful. You're Admin");
-                }
-                else
-                {
-                    GlobalClass.UserID = Int32.Parse(dtUser.Rows[0]["ID"].ToString());
-                    GlobalClass.LoginTime = DateTime.Now.TimeOfDay;
+                GlobalClass.RoleID = role;
+                GlobalClass.FirstName = dtUser.Rows[0]["FirstName"].ToString();
+                GlobalClass.UserID = Int32.Parse(dtUser.Rows[0]["ID"].ToString());
+                GlobalClass.LoginTime = DateTime.Now.TimeOfDay;
+                Boolean isActive = Boolean.Parse(dtUser.Rows[0]["Active"].ToString());
 
-                    bool success = FunctionSession1.InsertLogs(GlobalClass.UserID, DateTime.Now.Date, GlobalClass.LoginTime);
-                    if (success)
+                if (isActive)
+                {
+                    DataTable userLogs = FunctionSession1.getLogByUserId(GlobalClass.UserID);
+                    int logsCount = userLogs.Rows.Count;
+                    if (logsCount >= 1 && DBNull.Value.Equals(userLogs.Rows[logsCount - 1]["LogoutTime"]))
                     {
                         this.Hide();
-                        frmUser frmUser = new frmUser();
-                        frmUser.username = dtUser.Rows[0]["FirstName"].ToString();
-                        frmUser.Show();
-                        
+                        frmNoLogoutDetected frmReport = new frmNoLogoutDetected();
+                        frmReport.LastDateLogin = DateTime.Parse(userLogs.Rows[logsCount - 1]["DateLogin"].ToString());
+                        frmReport.LastLoginTime = TimeSpan.Parse(userLogs.Rows[logsCount - 1]["LoginTime"].ToString());
+                        frmReport.ShowDialog();
+                    }
+
+                    if (role == 1)
+                    {
+                        MessageBox.Show("Login successful. You're Admin");
                     }
                     else
                     {
-                        MessageBox.Show("Cannot write the logs to database !!!");
+                        
+                        bool success = FunctionSession1.InsertLogs(GlobalClass.UserID, DateTime.Now.Date, GlobalClass.LoginTime);
+                        if (success)
+                        {
+                            isClose = true;
+                            this.Close();
+                            frmUser frmUser = new frmUser();
+                            frmUser.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cannot write the logs to database !!!");
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Your account was disabled !!!");
                 }
             }
             else
@@ -76,6 +97,7 @@ namespace TTN_Amonic
                     txtPassword.Enabled = false;
                     btnLogin.Enabled = false;
                     timer.Enabled = true;
+                    loginCount = 0;
                 }
                 MessageBox.Show("Username or password was wrong !!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -123,14 +145,15 @@ namespace TTN_Amonic
 
         private void frmUser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            //    e.Cancel = true;
-            //else
-            //{
-            //    if (GlobalClass.UserID != -1)
-            //        FunctionSession1.Logout(GlobalClass.UserID, GlobalClass.LoginTime);
-            //    this.Close();
-            //}
+            if (isClose) return;
+            if (MessageBox.Show("Do you want to exit ?", "Warning !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                e.Cancel = true;
+            else
+            {
+                if (GlobalClass.UserID != -1)
+                    FunctionSession1.Logout(GlobalClass.UserID, GlobalClass.LoginTime);
+                this.Close();
+            }
         }
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)

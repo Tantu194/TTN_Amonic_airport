@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTN_Amonic", "TTN_Amonic\TTN_Amonic.csproj", "{62530587-0B22-47F4-A42B-6A53F7D97645}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Session1", "TTN_Amonic\Session1.csproj", "{62530587-0B22-47F4-A42B-6A53F7D97645}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

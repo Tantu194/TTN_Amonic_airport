@@ -12,7 +12,6 @@ namespace TTN_Amonic
 {
     public partial class frmChangeRole : Form
     {
-
         private int uid;
 
         public frmChangeRole()
@@ -31,7 +30,7 @@ namespace TTN_Amonic
         /// </summary>
         private void loadData()
         {
-            DataTable dt = DataAccess.Query(@"select Users.*,Offices.Title from Users, Offices where Users.OfficeID = Offices.ID and Users.ID = @id",new Dictionary<string, object> { {"id",uid } });
+            DataTable dt = FunctionSession1.getOneUser(uid);
             try
             {
                 tbEmail.Text = dt.Rows[0]["Email"].ToString();
@@ -49,7 +48,7 @@ namespace TTN_Amonic
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lỗi: khong nap duoc du lieu","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Error: can not load data", "Notification", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             
         }
@@ -77,22 +76,19 @@ namespace TTN_Amonic
             
             try
             {
-                if(DataAccess.Execute(@"update Users set RoleID = @roleID where id = @uid", new Dictionary<string, object> {
-                    { "roleID", roleID},
-                    {"uid", uid}
-                }))
+                if (FunctionSession1.updateUserRole(uid, roleID))
                 {
-                    MessageBox.Show("Thay đổi thành công!", "Thông báo", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("Successfully changed!", "Notification", MessageBoxButtons.OK,MessageBoxIcon.Information);
                     loadData();
                 }
                 else
                 {
-                    MessageBox.Show("Thay đổi Thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show("Change Failure!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lỗi: khong nap duoc du lieu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: can not load data", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

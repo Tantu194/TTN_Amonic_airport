@@ -35,21 +35,20 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.cbOfice = new System.Windows.Forms.ComboBox();
-            this.dtgrvUser = new System.Windows.Forms.DataGridView();
             this.btnChangeRole = new System.Windows.Forms.Button();
             this.btnEnable = new System.Windows.Forms.Button();
             this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.session1DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.colFName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Active = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userRole = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.office = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lvUser = new System.Windows.Forms.ListView();
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lastName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.age = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.userRole = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.office = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.active = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrvUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.session1DataSetBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -74,6 +73,7 @@
             // 
             // addUserToolStripMenuItem
             // 
+            this.addUserToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.addUserToolStripMenuItem.Name = "addUserToolStripMenuItem";
             this.addUserToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.addUserToolStripMenuItem.Text = "&Add user";
@@ -81,6 +81,7 @@
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "&Exit";
@@ -88,6 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.label1.Location = new System.Drawing.Point(12, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
@@ -96,6 +98,8 @@
             // 
             // cbOfice
             // 
+            this.cbOfice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOfice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.cbOfice.FormattingEnabled = true;
             this.cbOfice.Location = new System.Drawing.Point(78, 28);
             this.cbOfice.Name = "cbOfice";
@@ -103,30 +107,9 @@
             this.cbOfice.TabIndex = 4;
             this.cbOfice.SelectedIndexChanged += new System.EventHandler(this.cbOfice_SelectedIndexChanged);
             // 
-            // dtgrvUser
-            // 
-            this.dtgrvUser.AllowUserToAddRows = false;
-            this.dtgrvUser.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dtgrvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgrvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colFName,
-            this.Active,
-            this.ID,
-            this.lastName,
-            this.age,
-            this.userRole,
-            this.emal,
-            this.office});
-            this.dtgrvUser.Location = new System.Drawing.Point(15, 58);
-            this.dtgrvUser.MultiSelect = false;
-            this.dtgrvUser.Name = "dtgrvUser";
-            this.dtgrvUser.RowHeadersVisible = false;
-            this.dtgrvUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtgrvUser.Size = new System.Drawing.Size(654, 302);
-            this.dtgrvUser.TabIndex = 5;
-            // 
             // btnChangeRole
             // 
+            this.btnChangeRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.btnChangeRole.Location = new System.Drawing.Point(15, 366);
             this.btnChangeRole.Name = "btnChangeRole";
             this.btnChangeRole.Size = new System.Drawing.Size(105, 35);
@@ -137,6 +120,7 @@
             // 
             // btnEnable
             // 
+            this.btnEnable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.btnEnable.Location = new System.Drawing.Point(215, 366);
             this.btnEnable.Name = "btnEnable";
             this.btnEnable.Size = new System.Drawing.Size(167, 35);
@@ -145,76 +129,80 @@
             this.btnEnable.UseVisualStyleBackColor = true;
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             // 
-            // colFName
+            // lvUser
             // 
-            this.colFName.DataPropertyName = "FirstName";
-            this.colFName.HeaderText = "Name";
-            this.colFName.MinimumWidth = 100;
-            this.colFName.Name = "colFName";
+            this.lvUser.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.name,
+            this.lastName,
+            this.age,
+            this.userRole,
+            this.email,
+            this.office,
+            this.ID,
+            this.active});
+            this.lvUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
+            this.lvUser.FullRowSelect = true;
+            this.lvUser.GridLines = true;
+            this.lvUser.Location = new System.Drawing.Point(15, 58);
+            this.lvUser.Name = "lvUser";
+            this.lvUser.Size = new System.Drawing.Size(658, 300);
+            this.lvUser.TabIndex = 7;
+            this.lvUser.UseCompatibleStateImageBehavior = false;
+            this.lvUser.View = System.Windows.Forms.View.Details;
             // 
-            // Active
+            // name
             // 
-            this.Active.DataPropertyName = "Active";
-            this.Active.HeaderText = "Active";
-            this.Active.Name = "Active";
-            this.Active.Visible = false;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
+            this.name.Text = "Name";
+            this.name.Width = 100;
             // 
             // lastName
             // 
-            this.lastName.DataPropertyName = "LastName";
-            this.lastName.HeaderText = "Last Name";
-            this.lastName.MinimumWidth = 100;
-            this.lastName.Name = "lastName";
+            this.lastName.Text = "Last Name";
+            this.lastName.Width = 100;
             // 
             // age
             // 
-            this.age.DataPropertyName = "Age";
-            this.age.HeaderText = "Age";
-            this.age.MinimumWidth = 50;
-            this.age.Name = "age";
+            this.age.Text = "Age";
             this.age.Width = 50;
             // 
             // userRole
             // 
-            this.userRole.DataPropertyName = "RoleTitle";
-            this.userRole.HeaderText = "User Role";
-            this.userRole.MinimumWidth = 100;
-            this.userRole.Name = "userRole";
+            this.userRole.Text = "User Role";
+            this.userRole.Width = 100;
             // 
-            // emal
+            // email
             // 
-            this.emal.DataPropertyName = "Email";
-            this.emal.HeaderText = "Emal Address";
-            this.emal.MinimumWidth = 100;
-            this.emal.Name = "emal";
-            this.emal.Width = 200;
+            this.email.Text = "Email Address";
+            this.email.Width = 200;
             // 
             // office
             // 
-            this.office.DataPropertyName = "OfficeTitle";
-            this.office.HeaderText = "Office";
-            this.office.MinimumWidth = 100;
-            this.office.Name = "office";
+            this.office.Text = "Office";
+            this.office.Width = 100;
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
+            this.ID.Width = 0;
+            // 
+            // active
+            // 
+            this.active.Text = "active";
+            this.active.Width = 0;
             // 
             // frmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 413);
+            this.Controls.Add(this.lvUser);
             this.Controls.Add(this.btnEnable);
             this.Controls.Add(this.btnChangeRole);
-            this.Controls.Add(this.dtgrvUser);
             this.Controls.Add(this.cbOfice);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(106)))), ((int)(((byte)(166)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
@@ -225,7 +213,6 @@
             this.Load += new System.EventHandler(this.frmAdmin_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgrvUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.session1DataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -243,17 +230,17 @@
         private System.Windows.Forms.ComboBox cbOfice;
         private System.Windows.Forms.BindingSource usersBindingSource1;
         private System.Windows.Forms.BindingSource session1DataSetBindingSource;
-        private System.Windows.Forms.DataGridView dtgrvUser;
         private System.Windows.Forms.Button btnChangeRole;
         private System.Windows.Forms.Button btnEnable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Active;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn age;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userRole;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn office;
+        private System.Windows.Forms.ListView lvUser;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader lastName;
+        private System.Windows.Forms.ColumnHeader age;
+        private System.Windows.Forms.ColumnHeader userRole;
+        private System.Windows.Forms.ColumnHeader email;
+        private System.Windows.Forms.ColumnHeader office;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.ColumnHeader active;
     }
 }
 
