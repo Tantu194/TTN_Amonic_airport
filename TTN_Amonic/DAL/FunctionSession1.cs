@@ -158,5 +158,51 @@ namespace TTN_Amonic.DAL
                 { "@UserId", userId}
             });
         }
+
+        /// <summary>
+        /// get all User
+        /// </summary>
+        /// <param name="officeId">filter with officeid</param>
+        /// <returns>data table</returns>
+        public static DataTable getAllUser(int officeId = -1)
+        {
+            string q = @"SELECT u.ID, u.FirstName, u.LastName, u.Active, DATEDIFF(YEAR, u.Birthdate, GETDATE()) Age, u.Email,
+	                r.Title RoleTitle,
+                    o.Title OfficeTitle
+                FROM Users(NOLOCK) u
+                   LEFT JOIN Roles(NOLOCK) r ON r.ID = u.RoleID
+
+                    LEFT JOIN Offices(NOLOCK) o ON o.ID = u.OfficeID
+                WHERE(@OfficeId = -1 OR u.OfficeId = @OfficeId)";
+            return DataAccess.Query(q, new Dictionary<string, object> {
+                { "OfficeId", officeId }
+            });
+        }
+
+        /// <summary>
+        /// get a user
+        /// </summary>
+        /// <param name="uid">filter with uid</param>
+        /// <returns>datatable</returns>
+        public static DataTable getOneUser(int uid)
+        {
+            string q = @"select Users.*,Offices.Title from Users, Offices where Users.OfficeID = Offices.ID and Users.ID = @id";
+            return DataAccess.Query(q, new Dictionary<string, object> { { "id", uid } });
+        }
+
+        /// <summary>
+        /// update userrole
+        /// </summary>
+        /// <param name="uid">uid</param>
+        /// <param name="roleID">roleid</param>
+        /// <returns>true or false</returns>
+        public static bool updateUserRole(int uid, int roleID)
+        {
+            string q = @"update Users set RoleID = @roleID where id = @uid";
+            return DataAccess.Execute(q, new Dictionary<string, object> {
+                { "roleID", roleID},
+                    {"uid", uid}
+            });
+        }
     }
 }
