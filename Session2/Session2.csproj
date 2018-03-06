@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,11 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\DataAccess.cs" />
+    <Compile Include="DAL\FunctionSession2.cs" />
     <Compile Include="frmImportChange.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmImportChange.Designer.cs">
       <DependentUpon>frmImportChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageFlight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageFlight.Designer.cs">
+      <DependentUpon>frmManageFlight.cs</DependentUpon>
     </Compile>
     <Compile Include="frmScheduleEdit.cs">
       <SubType>Form</SubType>
@@ -59,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmImportChange.resx">
       <DependentUpon>frmImportChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageFlight.resx">
+      <DependentUpon>frmManageFlight.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmScheduleEdit.resx">
       <DependentUpon>frmScheduleEdit.cs</DependentUpon>
@@ -72,6 +84,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

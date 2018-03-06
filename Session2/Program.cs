@@ -15,7 +15,7 @@ namespace Session2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmScheduleEdit());
+            Application.Run(new frmManageFlight());
         }
     }
 }
