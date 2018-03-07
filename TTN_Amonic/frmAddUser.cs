@@ -20,7 +20,11 @@ namespace TTN_Amonic
 
         private frmAdmin frmAdmin;
 
-        public frmAdmin FrmAdmin { get => frmAdmin; set => frmAdmin = value; }
+        public frmAdmin FrmAdmin
+        {
+            get { return frmAdmin; }
+            set { frmAdmin = value; }
+        }
 
         private void frmAddUser_Load(object sender, EventArgs e)
         {
